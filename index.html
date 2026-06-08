@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Контакты — Kapitalbank</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --yellow:#F5C800;
+  --yellow-dark:#e0b500;
+  --dark:#1a1a1a;
+  --white:#fff;
+  --bg:#f5f5f5;
+  --text:#222;
+  --muted:#777;
+  --border:#e8e8e8;
+}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+
+.header{background:var(--white);box-shadow:0 1px 6px rgba(0,0,0,.08);position:sticky;top:0;z-index:100}
+.header-top{display:flex;align-items:center;gap:0;padding:0 32px;height:52px;border-bottom:1px solid var(--border)}
+.logo{display:flex;align-items:center;gap:6px;text-decoration:none;margin-right:40px;flex-shrink:0}
+.logo-badge{background:var(--yellow);border-radius:4px;padding:4px 8px;display:flex;align-items:center;gap:5px}
+.logo-badge svg{width:14px;height:14px;color:#1a1a1a}
+.logo-text{font-size:13px;font-weight:800;color:#1a1a1a;letter-spacing:.5px}
+.header-nav{display:flex;align-items:center;gap:0;flex:1}
+.header-nav a{color:#222;font-size:13.5px;font-weight:500;text-decoration:none;padding:0 14px;height:52px;display:flex;align-items:center;border-bottom:2px solid transparent;transition:color .2s}
+.header-nav a.active{color:var(--dark);border-bottom-color:var(--yellow)}
+.header-nav a:hover{color:#000}
+.header-nav a.muted{color:var(--muted)}
+.header-icons{display:flex;align-items:center;gap:16px;margin-left:auto}
+.header-icons svg{width:18px;height:18px;color:#555;cursor:pointer;transition:color .2s}
+.header-icons svg:hover{color:#000}
+
+.nav-bar{display:flex;align-items:center;padding:0 32px;height:44px;gap:0;overflow-x:auto;scrollbar-width:none}
+.nav-bar::-webkit-scrollbar{display:none}
+.nav-bar a{color:#444;font-size:13px;font-weight:400;text-decoration:none;padding:0 14px;height:44px;display:flex;align-items:center;white-space:nowrap;transition:color .2s}
+.nav-bar a:hover{color:#000}
+.online-btn{margin-left:auto;background:var(--yellow);color:#1a1a1a!important;font-weight:600;font-size:12.5px;border-radius:7px;padding:0 14px!important;height:32px!important;display:flex;align-items:center;gap:6px;flex-shrink:0}
+.online-btn svg{width:14px;height:14px}
+
+.hero{background:var(--white);padding:48px 32px 44px}
+.hero-inner{max-width:900px;margin:0 auto;display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.hero-text h1{font-size:clamp(24px,3.5vw,34px);font-weight:700;color:#1a1a1a;margin-bottom:10px;line-height:1.2}
+.hero-text p{color:#555;font-size:15px;max-width:340px;margin-bottom:28px;line-height:1.6}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-call{display:inline-flex;align-items:center;gap:8px;background:var(--yellow);color:#1a1a1a;font-weight:600;font-size:14px;padding:12px 24px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:background .2s}
+.btn-call:hover{background:var(--yellow-dark)}
+.btn-call svg{width:16px;height:16px}
+.btn-branch{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#1a1a1a;font-weight:500;font-size:14px;padding:11px 22px;border-radius:8px;border:1.5px solid #ddd;cursor:pointer;text-decoration:none;transition:border-color .2s,background .2s}
+.btn-branch:hover{border-color:#bbb;background:#fafafa}
+.btn-branch svg{width:15px;height:15px}
+
+.icon-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex-shrink:0}
+.icon-box{width:60px;height:60px;border-radius:14px;border:2px solid var(--yellow);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s;text-decoration:none}
+.icon-box:hover{background:var(--yellow)}
+.icon-box:hover svg{color:#1a1a1a}
+.icon-box svg{width:24px;height:24px;color:var(--yellow);transition:color .2s}
+
+.content{max-width:900px;margin:0 auto;padding:36px 32px 60px}
+
+.section-title{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:20px}
+
+.links-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:40px}
+@media(max-width:700px){.links-grid{grid-template-columns:1fr}}
+
+.link-card{background:var(--white);border-radius:12px;padding:22px 20px;display:flex;flex-direction:column;justify-content:space-between;min-height:130px;position:relative;overflow:hidden;text-decoration:none;color:inherit}
+.link-card.wide{grid-column:span 1}
+.link-card h3{font-size:15px;font-weight:700;color:#1a1a1a;margin-bottom:6px;line-height:1.35;max-width:70%}
+.link-card p{font-size:12.5px;color:#777;max-width:70%;margin-bottom:16px}
+.link-card .go-btn{display:inline-flex;align-items:center;gap:6px;background:var(--yellow);color:#1a1a1a;font-weight:600;font-size:12.5px;padding:8px 16px;border-radius:7px;border:none;cursor:pointer;text-decoration:none;transition:background .2s;width:fit-content}
+.link-card .go-btn:hover{background:var(--yellow-dark)}
+.link-card .go-btn svg{width:12px;height:12px}
+.card-img{position:absolute;right:-6px;bottom:-4px;width:100px;height:90px;object-fit:contain;pointer-events:none}
+
+.card-illo{position:absolute;right:10px;bottom:0;width:90px;height:85px;pointer-events:none}
+.illo-doc{right:8px;bottom:0}
+.illo-bank{right:6px;bottom:0}
+.illo-career{right:6px;bottom:0}
+
+.schedule-section{margin-top:8px}
+.schedule-title{font-size:22px;font-weight:700;color:#1a1a1a;margin-bottom:20px}
+.schedule-table{width:100%;border-collapse:collapse}
+.schedule-table tr{border-bottom:1px solid #f0f0f0}
+.schedule-table tr:last-child{border-bottom:none}
+.schedule-table td{padding:12px 0;vertical-align:top;font-size:13.5px}
+.person-name{font-weight:600;color:#1a1a1a;margin-bottom:2px}
+.person-role{color:#888;font-size:12.5px;max-width:340px;line-height:1.4}
+.schedule-day{color:#1a1a1a;font-size:13.5px;text-align:right;white-space:nowrap;padding-left:20px}
+.schedule-time{color:#555;font-size:13px;text-align:right}
+
+.contact-section{margin-bottom:36px}
+.contact-block{background:var(--white);border-radius:12px;padding:22px 24px;margin-bottom:14px}
+.contact-block h3{font-size:15px;font-weight:700;margin-bottom:16px;color:#1a1a1a}
+.contact-row{display:flex;align-items:center;justify-content:space-between;padding:9px 0;border-bottom:1px solid #f5f5f5;gap:12px;flex-wrap:wrap}
+.contact-row:last-child{border-bottom:none;padding-bottom:0}
+.clabel{font-size:13px;color:#555;flex:1;min-width:120px}
+.clabel small{display:block;color:#aaa;font-size:12px;margin-top:2px}
+.caction{display:inline-flex;align-items:center;gap:7px;font-size:13px;font-weight:600;padding:8px 16px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:background .2s,transform .1s;white-space:nowrap}
+.caction.cy{background:var(--yellow);color:#1a1a1a}
+.caction.cy:hover{background:var(--yellow-dark)}
+.caction.cm{background:#fffbdf;color:#1a1a1a;border:1.5px solid var(--yellow)}
+.caction.cm:hover{background:var(--yellow)}
+.caction svg{width:13px;height:13px}
+
+.addr-block{background:var(--white);border-radius:12px;padding:22px 24px;margin-bottom:14px}
+.addr-block h3{font-size:15px;font-weight:700;margin-bottom:10px}
+.addr-block p{font-size:13.5px;color:#555;margin-bottom:4px}
+.map-link{display:inline-flex;align-items:center;gap:7px;margin-top:14px;background:var(--yellow);color:#1a1a1a;font-weight:600;font-size:13px;padding:9px 18px;border-radius:8px;text-decoration:none;border:none;cursor:pointer;transition:background .2s}
+.map-link:hover{background:var(--yellow-dark)}
+
+.rekv-block{background:var(--white);border-radius:12px;padding:22px 24px;margin-bottom:14px}
+.rekv-block h3{font-size:15px;font-weight:700;margin-bottom:14px}
+.rekv-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f5f5f5;font-size:13.5px}
+.rekv-row:last-child{border-bottom:none}
+.rk{color:#777}
+.rv{font-weight:600}
+
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(12px);background:#1a1a1a;color:#fff;padding:10px 22px;border-radius:9px;font-size:13.5px;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;z-index:999;white-space:nowrap}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media(max-width:768px){
+  .header-top{padding:0 16px}
+  .nav-bar{padding:0 16px}
+  .hero{padding:32px 16px 28px}
+  .hero-inner{gap:16px}
+  .content{padding:24px 16px 48px}
+  .icon-box{width:52px;height:52px}
+  .icon-box svg{width:20px;height:20px}
+  .hero-text h1{font-size:22px}
+}
+@media(max-width:520px){
+  .header-nav{display:none}
+  .hero-inner{flex-direction:column}
+  .icon-grid{align-self:flex-end}
+  .hero-btns{width:100%}
+  .btn-call,.btn-branch{flex:1;justify-content:center}
+  .contact-row{flex-direction:column;align-items:flex-start}
+  .links-grid{grid-template-columns:1fr}
+  .schedule-table td{font-size:12.5px}
+  .schedule-day,.schedule-time{padding-left:10px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <a href="#" class="logo">
+      <div class="logo-badge">
+        <svg fill="none" viewBox="0 0 14 14" stroke="currentColor" stroke-width="2"><path d="M1 3h12v8H1z"/><path d="M1 6.5h12"/></svg>
+        <span class="logo-text">KAPITALBANK</span>
+      </div>
+    </a>
+    <nav class="header-nav">
+      <a href="#" class="active">Частным лицам</a>
+      <a href="#" class="muted">Малому и среднему бизнесу</a>
+      <a href="#" class="muted">Крупному бизнесу</a>
+    </nav>
+    <div class="header-icons">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    </div>
+  </div>
+  <div class="nav-bar">
+    <a href="#">Тарифы</a>
+    <a href="#">Приём платежей</a>
+    <a href="#">Депозиты</a>
+    <a href="#">Кредиты</a>
+    <a href="#">Эквайринг</a>
+    <a href="#">Ещё</a>
+    <a href="#" class="online-btn">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Онлайн-банк
+    </a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div class="hero-text">
+      <h1>Контакты Kapitalbank</h1>
+      <p>Найдите удобный способ связаться с нами и получить профессиональную консультацию</p>
+      <div class="hero-btns">
+        <a class="btn-call" href="tel:+998712001515">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          Позвонить
+        </a>
+        <a class="btn-branch" href="#branch">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Найти филиал
+        </a>
+      </div>
+    </div>
+    <div class="icon-grid">
+      <a class="icon-box" href="tel:+998712001515" title="Позвонить">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+      </a>
+      <a class="icon-box" href="#" onclick="showToast('Личный кабинет');return false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      </a>
+      <a class="icon-box" href="mailto:customer.support@kapitalbank.uz">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      </a>
+      <a class="icon-box" href="#" onclick="showToast('Открываем чат...');return false">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<div class="content">
+
+  <div class="contact-section">
+    <h2 class="section-title">Контактная информация</h2>
+
+    <div class="contact-block">
+      <h3>Как позвонить в банк?</h3>
+      <div class="contact-row">
+        <div class="clabel">Для физических лиц<small>Короткий номер: 1340</small></div>
+        <a class="caction cy" href="tel:+998712001515">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +998 (71) 200-15-15
+        </a>
+      </div>
+      <div class="contact-row">
+        <div class="clabel">Для юридических лиц<small>Короткий номер: 1278</small></div>
+        <a class="caction cy" href="tel:+998781484908">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +998 (78) 148-49-08
+        </a>
+      </div>
+      <div class="contact-row">
+        <div class="clabel">Техподдержка<small>Круглосуточно</small></div>
+        <a class="caction cy" href="tel:1340">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.36 2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.76a16 16 0 0 0 6 6l.94-.94a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          1340
+        </a>
+      </div>
+    </div>
+
+    <div class="contact-block">
+      <h3>Как написать в банк?</h3>
+      <div class="contact-row">
+        <div class="clabel">Для физических лиц</div>
+        <a class="caction cm" href="mailto:customer.support@kapitalbank.uz">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          customer.support@kapitalbank.uz
+        </a>
+      </div>
+      <div class="contact-row">
+        <div class="clabel">Для юридических лиц</div>
+        <a class="caction cm" href="mailto:support@kapitalbank.uz">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          support@kapitalbank.uz
+        </a>
+      </div>
+      <div class="contact-row">
+        <div class="clabel">Общие вопросы и предложения</div>
+        <a class="caction cm" href="mailto:info@kapitalbank.uz">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          info@kapitalbank.uz
+        </a>
+      </div>
+    </div>
+
+    <div class="addr-block" id="branch">
+      <h3>Где посмотреть адреса и режим работы отделений?</h3>
+      <p>Головной офис: Узбекистан, 100047, г. Ташкент, Юнусабадский район, ул. Сайилгох, 7</p>
+      <p style="margin-top:8px;color:#777">Режим работы отделений: Понедельник — Пятница: 09:00–17:00</p>
+      <a class="map-link" href="#" onclick="showToast('Открываем карту...');return false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Перейти к карте
+      </a>
+    </div>
+
+    <div class="rekv-block">
+      <h3>Реквизиты банка</h3>
+      <div class="rekv-row"><span class="rk">МФО</span><span class="rv">01158</span></div>
+      <div class="rekv-row"><span class="rk">ИНН</span><span class="rv">207275139</span></div>
+      <div class="rekv-row"><span class="rk">SWIFT</span><span class="rv">KACHUZ22</span></div>
+    </div>
+  </div>
+
+  <h2 class="section-title">Полезные ссылки</h2>
+  <div class="links-grid">
+    <!-- Виртуальная приёмная -->
+    <div class="link-card" style="background:#fff;grid-column:span 1">
+      <div>
+        <h3>Виртуальная приёмная</h3>
+        <p>Направьте обращение Председателю Правления и получите официальный ответ</p>
+      </div>
+      <a href="#" class="go-btn" onclick="showToast('Виртуальная приёмная');return false">
+        Перейти
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+
+      <svg class="card-illo illo-doc" viewBox="0 0 90 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="18" y="10" width="44" height="58" rx="4" fill="#F5C800" opacity=".18"/>
+        <rect x="22" y="6" width="44" height="58" rx="4" fill="#F5C800" opacity=".35"/>
+        <rect x="26" y="2" width="44" height="58" rx="4" fill="#F5C800"/>
+        <rect x="33" y="14" width="28" height="3" rx="1.5" fill="#1a1a1a" opacity=".3"/>
+        <rect x="33" y="21" width="20" height="3" rx="1.5" fill="#1a1a1a" opacity=".2"/>
+        <rect x="33" y="28" width="24" height="3" rx="1.5" fill="#1a1a1a" opacity=".2"/>
+        <circle cx="68" cy="58" r="14" fill="#1a1a1a"/>
+        <path d="M62 58l4 4 8-8" stroke="#F5C800" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+
+  
+    <div class="link-card" style="background:#fff">
+      <div>
+        <h3>Филиалы и Банкоматы</h3>
+        <p>Используйте карту, чтобы найти ближайшее отделение банка</p>
+      </div>
+      <a href="#" class="go-btn" onclick="showToast('Карта филиалов');return false">
+        Перейти
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <svg class="card-illo illo-bank" viewBox="0 0 90 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="10" y="30" width="50" height="45" rx="3" fill="#F5C800" opacity=".25"/>
+        <rect x="14" y="26" width="50" height="45" rx="3" fill="#F5C800" opacity=".5"/>
+        <rect x="18" y="22" width="50" height="45" rx="3" fill="#F5C800"/>
+        <rect x="28" y="38" width="8" height="14" rx="1" fill="#1a1a1a" opacity=".35"/>
+        <rect x="40" y="38" width="8" height="14" rx="1" fill="#1a1a1a" opacity=".35"/>
+        <rect x="52" y="38" width="8" height="14" rx="1" fill="#1a1a1a" opacity=".35"/>
+        <rect x="24" y="56" width="40" height="5" rx="1" fill="#1a1a1a" opacity=".2"/>
+        <polygon points="43,10 18,26 68,26" fill="#e0b500"/>
+      </svg>
+    </div>
+
+    <div class="link-card" style="background:#fff">
+      <div>
+        <h3>Карьера в Kapitalbank</h3>
+        <p>Присоединяйтесь к команде профессионалов</p>
+      </div>
+      <a href="#" class="go-btn" onclick="showToast('Карьера');return false">
+        Перейти
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <svg class="card-illo illo-career" viewBox="0 0 90 85" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="12" y="50" width="16" height="28" rx="2" fill="#F5C800" opacity=".4"/>
+        <rect x="32" y="38" width="16" height="40" rx="2" fill="#F5C800" opacity=".6"/>
+        <rect x="52" y="24" width="16" height="54" rx="2" fill="#F5C800"/>
+        <circle cx="20" cy="42" r="5" fill="#e0b500"/>
+        <circle cx="40" cy="30" r="5" fill="#e0b500"/>
+        <circle cx="60" cy="16" r="5" fill="#e0b500"/>
+        <path d="M20 42 L40 30 L60 16" stroke="#1a1a1a" stroke-width="1.5" stroke-dasharray="3 2" opacity=".4"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="schedule-section">
+    <h2 class="schedule-title">График приема граждан</h2>
+    <table class="schedule-table">
+      <tr>
+        <td>
+          <div class="person-name">Мамаев Кирилл Леонидович</div>
+          <div class="person-role">Председатель Правления</div>
+        </td>
+        <td class="schedule-day">Вторник<br><span class="schedule-time">09:00 – 17:00</span></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="person-name">Тян Константин Владимирович</div>
+          <div class="person-role">Первый исполнительный директор – Заместитель Председателя Правления (Член Правления)</div>
+        </td>
+        <td class="schedule-day">Среда<br><span class="schedule-time">09:00 – 17:00</span></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="person-name">Исмаилов Садриддин Санакулович</div>
+          <div class="person-role">Заместитель Председателя Правления (Член Правления)</div>
+        </td>
+        <td class="schedule-day">Пятница<br><span class="schedule-time">09:00 – 17:00</span></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="person-name">Гредасов Алексей Павлович</div>
+          <div class="person-role">Заместитель Председателя Правления (Член Правления)</div>
+        </td>
+        <td class="schedule-day">Четверг<br><span class="schedule-time">09:00 – 17:00</span></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="person-name">Симонова Екатерина Александровна</div>
+          <div class="person-role">Заместитель Председателя Правления (Член Правления)</div>
+        </td>
+        <td class="schedule-day">Четверг<br><span class="schedule-time">09:00 – 17:00</span></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="person-name">Рафик Амалья Акмал угли</div>
+          <div class="person-role">Заместитель Председателя Правления (Член Правления)</div>
+        </td>
+        <td class="schedule-day">Пятница<br><span class="schedule-time">09:00 – 17:00</span></td>
+      </tr>
+      <tr>
+        <td>
+          <div class="person-name">Юсупова Мадина Абдурахимовна</div>
+          <div class="person-role">Заместитель Председателя Правления (Член Правления)</div>
+        </td>
+        <td class="schedule-day">Среда<br><span class="schedule-time">09:00 – 17:00</span></td>
+      </tr>
+    </table>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+<script>
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2200);
+}
+</script>
+</body>
+</html>
